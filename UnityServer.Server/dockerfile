@@ -1,0 +1,6 @@
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-disco
+
+COPY build .
+
+
+CMD [ "dotnet","UnityServer.Server.dll" ]

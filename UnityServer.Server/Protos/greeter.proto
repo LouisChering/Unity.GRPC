@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package greet;
+
+// The greeting service definition.
+service MultiGreeter {
+    // Sends multiple greetings
+    rpc CreatePlayer (PlayerCreateRequest) returns (PlayerCreatedResponse) {};
+	rpc UpdatePlayer (PlayerUpdate) returns (PlayerUpdate) {};
+	rpc Players (PlayerRequest) returns (stream PlayerUpdate) {};
+}
+
+// request to create a player on the server, this is required to get a local i.d for communication
+message PlayerCreateRequest {
+    string name = 1;
+	string password = 2;
+	string avatar = 3;
+}
+
+message PlayerCreatedResponse {
+    string id = 1;
+}
+
+// request updates from players at a position, not used yet by the server
+message PlayerRequest {
+	string location = 1;
+}
+
+// contains a change to a key value for a player, i.d helps distinguish the player
+message PlayerUpdate {
+    string id = 1;
+    string key = 2;
+	string value = 3;
+}
